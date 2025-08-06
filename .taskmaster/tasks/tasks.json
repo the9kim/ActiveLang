@@ -1,0 +1,258 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Initialize Flutter Project and Configure Development Environment",
+        "description": "Set up Flutter project structure with proper architecture, configure Supabase SDK, and establish development workflow",
+        "details": "Create Flutter project using 'flutter create active_lang'. Set up project structure following clean architecture: lib/core (constants, errors, usecases), lib/features (sentence, review, authentication), lib/presentation (screens, widgets, state). Add dependencies: supabase_flutter: ^2.5.0, flutter_bloc: ^8.1.3, get_it: ^7.6.0, freezed: ^2.4.5, flutter_local_notifications: ^17.0.0, shared_preferences: ^2.2.2, intl: ^0.19.0. Configure .env file for Supabase credentials. Set up Git hooks for code formatting and linting.",
+        "testStrategy": "Verify project builds successfully on iOS/Android. Ensure all dependencies are properly resolved. Test Supabase connection with a simple ping test. Validate project structure follows clean architecture principles.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Flutter Project and Initialize Repository",
+            "description": "Create a new Flutter project named 'active_lang' and initialize a Git repository for version control.",
+            "dependencies": [],
+            "details": "Run 'flutter create active_lang' to generate the base Flutter project. Initialize Git in the project directory and create an initial commit to track project setup.\n<info added on 2025-07-31T11:00:06.488Z>\nInitial project assessment completed. Project foundation exists with basic Flutter setup and Supabase integration. Current implementation includes:\n- Initialized Flutter project 'active_lang' with successful build verification\n- Configured Git repository with initial commit\n- Basic Supabase configuration in lib/config/supabase_config.dart\n- Core dependencies installed: supabase_flutter, freezed_annotation, json_annotation, and associated code generation packages\n\nRequired actions for completion:\n1. Add essential dependencies:\n   - flutter_bloc for state management\n   - get_it for dependency injection\n   - shared_preferences for local storage\n   - intl for internationalization\n   - flutter_local_notifications for push notifications\n2. Configure environment variables for Supabase credentials\n3. Set up Git hooks for:\n   - Pre-commit linting\n   - Code formatting checks\n   - Unit test execution\n4. Update .gitignore to exclude sensitive configuration files and build artifacts\n</info added on 2025-07-31T11:00:06.488Z>",
+            "status": "done",
+            "testStrategy": "Verify the project builds successfully on both iOS and Android emulators. Confirm Git repository is properly initialized with initial commit."
+          },
+          {
+            "id": 2,
+            "title": "Set Up Project Structure Following Clean Architecture",
+            "description": "Organize the Flutter project directory into a clean architecture structure with core, features, and presentation layers.",
+            "dependencies": [],
+            "details": "Create folders under 'lib' as follows: 'core' for constants, errors, and usecases; 'features' for sentence, review, and authentication modules; 'presentation' for screens, widgets, and state management. Follow the feature-first approach to keep feature code encapsulated and maintainable.\n<info added on 2025-07-31T11:03:05.583Z>\nClean architecture implementation completed with the following structure:\n\nCore Layer:\n- app_constants.dart for configuration and constants\n- failures.dart with freezed for error handling\n- usecase.dart implementing base usecase with dartz Either\n\nFeature Layer (implemented for sentence module):\n- Domain: entities (sentence.dart), repository interfaces, and usecases\n- Presentation: BLoC implementation with events and states\n\nShared Layer:\n- widgets/ for reusable UI components\n- models/ for shared data models\n- services/ for common functionality\n\nDependencies integrated:\n- flutter_bloc (8.1.3) for state management\n- get_it (7.6.0) for dependency injection\n- dartz (0.10.1) for functional programming\n- shared_preferences (2.2.2) for local storage\n- flutter_local_notifications (17.0.0)\n- intl (0.19.0) for internationalization\n- flutter_dotenv (5.1.0) for environment configuration\n\nBuild runner successfully generated freezed files. Architecture ensures separation of concerns, testability, and maintainable code structure with feature-first organization.\n</info added on 2025-07-31T11:03:05.583Z>",
+            "status": "done",
+            "testStrategy": "Verify folder structure matches clean architecture principles. Ensure that each feature folder contains its own domain, data, and presentation subfolders if applicable."
+          },
+          {
+            "id": 3,
+            "title": "Add and Configure Required Dependencies",
+            "description": "Add necessary Flutter dependencies to pubspec.yaml and configure them for use in the project.",
+            "dependencies": [],
+            "details": "Add dependencies including supabase_flutter ^2.5.0, flutter_bloc ^8.1.3, get_it ^7.6.0, freezed ^2.4.5, flutter_local_notifications ^17.0.0, shared_preferences ^2.2.2, and intl ^0.19.0. Run 'flutter pub get' to install packages and verify no conflicts.",
+            "status": "done",
+            "testStrategy": "Ensure all dependencies are resolved without errors. Test basic usage of Supabase SDK by performing a simple connection or ping test."
+          },
+          {
+            "id": 4,
+            "title": "Configure Environment Variables for Supabase",
+            "description": "Set up a .env file to securely store Supabase credentials and configure the Flutter project to load these variables.",
+            "dependencies": [],
+            "details": "Create a .env file at the project root containing Supabase URL and anon key. Use a package like flutter_dotenv to load environment variables at runtime. Ensure credentials are not hardcoded in source files.\n<info added on 2025-07-31T11:03:54.329Z>\nEnvironment variables configuration has been completed with the following implementation details:\n\nThe SupabaseConfig class in lib/config/supabase_config.dart now uses flutter_dotenv for secure credential management. Environment variables are loaded before app initialization in main.dart. Configuration follows the pattern of using getter methods with fallback values: static String get url => dotenv.env['SUPABASE_URL'] ?? 'fallback_value'.\n\nKey security measures implemented:\n- .env file is properly listed in .gitignore\n- No credentials are hardcoded in source code\n- Fallback values ensure development environment stability\n- Environment-specific configurations are properly separated\n\nThe implementation allows for flexible configuration across development and production environments while maintaining secure credential management practices.\n</info added on 2025-07-31T11:03:54.329Z>",
+            "status": "done",
+            "testStrategy": "Verify that Supabase credentials are loaded correctly from the .env file. Test connection to Supabase backend using these credentials."
+          },
+          {
+            "id": 5,
+            "title": "Set Up Git Hooks for Code Formatting and Linting",
+            "description": "Implement Git hooks to enforce code quality by running formatting and linting checks before commits.",
+            "dependencies": [],
+            "details": "Configure Git hooks using tools like Husky or custom scripts to run 'flutter format' and 'flutter analyze' before allowing commits. Ensure consistent code style and catch errors early in the development workflow.\n<info added on 2025-07-31T11:05:54.444Z>\nGit hooks have been successfully implemented with comprehensive pre-commit checks. The pre-commit hook executes Flutter format (lib/ and test/ directories), Flutter analyze for static code analysis, and Flutter test suite. The hook prevents commits when checks fail and displays clear status messages with emoji indicators. All verification checks are passing: code analysis shows no issues, all tests are successful, code formatting is consistent, and the pre-commit hook is properly executable. The implementation ensures code quality standards by preventing commits of broken or poorly formatted code.\n\nThe hook script is configured to run automatically before each commit and exits with appropriate status codes based on check results. Test infrastructure has been updated in test/widget_test.dart with proper app testing setup, and all identified import issues and linting warnings have been resolved.\n</info added on 2025-07-31T11:05:54.444Z>",
+            "status": "done",
+            "testStrategy": "Attempt to commit code with formatting or linting issues and verify that hooks prevent the commit. Confirm that properly formatted and lint-free code commits successfully."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Design and Implement Supabase Database Schema",
+        "description": "Create database tables for users, sentences, and review records with proper relationships and constraints",
+        "details": "Create tables in Supabase: 1) users (id, email, created_at, preferences), 2) sentences (id, user_id, english_text, korean_text, created_at, updated_at, is_active), 3) reviews (id, sentence_id, user_id, assessment_level, reviewed_at, next_review_date). Set up RLS policies for user data isolation. Create indexes on frequently queried fields (user_id, next_review_date). Implement database functions for calculating next review date based on spaced repetition algorithm. Use Supabase migrations for version control.",
+        "testStrategy": "Write SQL tests to verify table creation, constraints, and RLS policies. Test CRUD operations for each table. Verify indexes improve query performance. Test edge cases like duplicate entries and cascading deletes.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Implement Authentication System",
+        "description": "Set up user authentication using Supabase Auth with email/password and social login options",
+        "details": "Implement authentication using supabase_flutter auth module. Create AuthRepository with methods: signUp, signIn, signOut, getCurrentUser, resetPassword. Implement AuthBloc for state management with states: AuthInitial, AuthLoading, AuthAuthenticated, AuthUnauthenticated, AuthError. Create login/signup screens with form validation using flutter_form_builder: ^9.1.0. Add Google OAuth integration for easier onboarding. Implement auto-login using stored session tokens. Handle deep links for email verification.",
+        "testStrategy": "Unit test AuthRepository methods with mock Supabase client. Test AuthBloc state transitions. Integration test authentication flow from signup to login. Test session persistence across app restarts. Verify email verification flow.",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Create Sentence Management Feature",
+        "description": "Implement functionality to add, edit, delete, and view sentences with English-Korean pairs",
+        "details": "Create SentenceRepository with methods: addSentence, updateSentence, deleteSentence, getSentences, searchSentences. Implement SentenceBloc with CRUD operations and pagination support. Design sentence input screen with TextFormFields for English/Korean text, character limits (English: 200, Korean: 100), and real-time validation. Add sentence list screen with search functionality, swipe-to-delete, and pull-to-refresh. Implement offline-first approach using Hive: ^2.2.3 for local caching. Sync local changes with Supabase when online.",
+        "testStrategy": "Unit test SentenceRepository with mock data. Test SentenceBloc state management for all CRUD operations. Test offline functionality by toggling network connectivity. Verify data sync between local and remote storage. Test input validation and error handling.",
+        "priority": "high",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Implement Spaced Repetition Algorithm",
+        "description": "Create the core spaced repetition logic based on user assessment levels to calculate optimal review intervals",
+        "details": "Implement modified SM-2 algorithm with intervals: High (1, 3, 7, 14, 30, 60 days), Medium (1, 2, 4, 7, 14, 30 days), Low (6 hours, 1, 2, 3, 5, 7 days). Create SpacedRepetitionService with calculateNextReviewDate method considering assessment history. Store repetition parameters: easiness factor (2.5 default), interval multiplier, consecutive correct count. Implement algorithm adjustments based on user performance patterns. Add option for users to customize interval preferences in settings.",
+        "testStrategy": "Unit test algorithm with various assessment sequences. Verify interval calculations match expected values. Test edge cases like multiple consecutive failures. Compare algorithm performance with established SRS systems. A/B test different interval configurations.",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Build Review Interface and Flow",
+        "description": "Create the core review experience where users see Korean text and attempt to recall English sentences",
+        "details": "Design review screen with card-flip animation using AnimationController. Show Korean translation prominently with 'Reveal Answer' button. Implement gesture recognition for card interactions (swipe for next, tap to reveal). Add optional hint system showing first letter or word count. Create assessment buttons (High/Medium/Low) with clear visual feedback. Implement review session management with progress tracking. Add audio feedback for correct/incorrect responses using just_audio: ^0.9.35. Include 'Skip' option that reschedules for 1 hour later.",
+        "testStrategy": "Test card flip animations on different devices. Verify gesture recognition accuracy. Test review flow with various sentence lengths. Ensure assessment updates trigger correct algorithm calculations. Test skip functionality and rescheduling logic.",
+        "priority": "high",
+        "dependencies": [
+          4,
+          5
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Implement Review Scheduling and Notifications",
+        "description": "Create notification system to remind users of pending reviews at optimal times",
+        "details": "Implement NotificationService using flutter_local_notifications with timezone support. Create review scheduling logic considering user's active hours (default 9 AM - 9 PM). Batch notifications to avoid spam (max 3 per day). Implement smart scheduling that groups reviews into sessions. Add notification preferences: frequency, quiet hours, sound settings. Create background task using workmanager: ^0.5.1 to check and schedule notifications even when app is closed. Handle notification taps to deep link to review screen.",
+        "testStrategy": "Test notification scheduling accuracy across timezones. Verify notifications appear at scheduled times. Test deep linking from notifications. Ensure background tasks run reliably. Test notification preferences and quiet hours.",
+        "priority": "medium",
+        "dependencies": [
+          5,
+          6
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Design and Implement Main Dashboard",
+        "description": "Create home screen showing review statistics, upcoming reviews, and quick actions",
+        "details": "Design dashboard with Material You (Material 3) components. Display key metrics: sentences due today, current streak, total sentences mastered. Implement circular progress indicator for daily goal completion. Add quick action buttons: Start Review, Add Sentence, View All Sentences. Create mini calendar view showing review density using table_calendar: ^3.0.9. Implement pull-to-refresh for real-time updates. Add motivational messages based on user progress. Use fl_chart: ^0.66.0 for weekly progress visualization.",
+        "testStrategy": "Test dashboard data accuracy against actual review records. Verify UI updates reflect real-time changes. Test responsive design on various screen sizes. Ensure chart rendering performance with large datasets. Test offline mode displays cached data.",
+        "priority": "medium",
+        "dependencies": [
+          6
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Create User Progress and Statistics Tracking",
+        "description": "Implement comprehensive analytics to track learning progress and provide insights",
+        "details": "Create AnalyticsRepository to track: daily active sentences, review completion rate, assessment distribution, streak tracking, time spent per review. Implement StatisticsBloc to aggregate data for different time periods. Design statistics screen with tabs: Today, Week, Month, All Time. Add export functionality for data (CSV format). Track meta-metrics: best review time, optimal session length, difficulty trends. Implement achievement system with milestones (10, 50, 100 sentences mastered). Store analytics locally first, sync to Supabase in batches.",
+        "testStrategy": "Verify metric calculations accuracy with known datasets. Test data aggregation for different time periods. Ensure export functionality produces valid CSV. Test achievement trigger conditions. Verify analytics don't impact app performance.",
+        "priority": "medium",
+        "dependencies": [
+          6,
+          8
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Implement Settings and User Preferences",
+        "description": "Create settings screen for app customization and user preferences management",
+        "details": "Design settings screen using ListTile components with sections: Account (email, password change), Learning (review intervals, daily goals), Notifications (frequency, sound, quiet hours), Display (theme, font size), Data (export, import, clear). Implement theme switching (light/dark/system) using Provider. Add language settings for UI (Korean/English). Create backup/restore functionality using device storage. Implement account deletion with data export option. Use shared_preferences for storing all settings locally with Supabase sync.",
+        "testStrategy": "Test each setting changes app behavior correctly. Verify settings persistence across sessions. Test theme switching without app restart. Ensure data export includes all user data. Test account deletion workflow completely removes user data.",
+        "priority": "low",
+        "dependencies": [
+          7,
+          9
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 11,
+        "title": "Add Import/Export Functionality",
+        "description": "Enable users to import sentences from CSV/text files and export their learning data",
+        "details": "Implement file picker using file_picker: ^6.1.1 for CSV/TXT import. Create CSV parser supporting formats: 'english,korean' or 'english\\tkorean'. Add import preview screen showing first 10 sentences with validation errors. Implement batch import with progress indicator and error handling. Create export functionality for sentences and progress data in CSV/JSON formats. Add share functionality using share_plus: ^7.2.1. Support importing from popular vocabulary apps' export formats.",
+        "testStrategy": "Test import with various file formats and encodings. Verify error handling for malformed data. Test large file imports (1000+ sentences). Ensure export data can be re-imported successfully. Test cross-platform file handling.",
+        "priority": "low",
+        "dependencies": [
+          4,
+          10
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 12,
+        "title": "Optimize Performance and Implement Caching",
+        "description": "Enhance app performance through strategic caching and query optimization",
+        "details": "Implement image caching for user avatars using cached_network_image: ^3.3.0. Add sentence pagination with lazy loading (20 items per page). Optimize Supabase queries using select statements and joins. Implement debouncing for search functionality. Cache review queue locally for offline access. Use IndexedDB for web platform storage optimization. Implement state persistence using hydrated_bloc: ^9.1.2. Add performance monitoring using Firebase Performance SDK.",
+        "testStrategy": "Measure app startup time before/after optimization. Test scrolling performance with 1000+ sentences. Verify cache invalidation works correctly. Test offline functionality comprehensively. Monitor memory usage during extended sessions.",
+        "priority": "medium",
+        "dependencies": [
+          8,
+          9
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 13,
+        "title": "Implement Error Handling and Crash Reporting",
+        "description": "Create robust error handling system with user-friendly messages and crash analytics",
+        "details": "Integrate Firebase Crashlytics for crash reporting. Create custom exception classes: NetworkException, AuthException, DataException. Implement global error handler using FlutterError.onError. Design error UI components with retry options. Add Sentry (sentry_flutter: ^7.14.0) for detailed error tracking. Create error boundary widgets to prevent full app crashes. Implement offline detection with connection_plus: ^5.0.2. Add user-friendly error messages in Korean and English.",
+        "testStrategy": "Test error scenarios: network timeout, auth failures, invalid data. Verify crash reports are sent to Firebase. Test error recovery mechanisms. Ensure error messages are helpful and actionable. Test offline mode transitions.",
+        "priority": "medium",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 14,
+        "title": "Create Comprehensive Testing Suite",
+        "description": "Develop unit, widget, and integration tests ensuring code coverage above 80%",
+        "details": "Set up testing environment with mockito: ^5.4.3 and bloc_test: ^9.1.5. Write unit tests for all repositories, services, and blocs. Create widget tests for critical UI components using golden tests. Implement integration tests for core user flows using integration_test package. Set up GitHub Actions for automated testing on PR. Configure coverage reports with codecov. Create custom test utilities for common scenarios. Mock Supabase responses for reliable testing.",
+        "testStrategy": "Achieve 80% code coverage minimum. Run tests on multiple Flutter SDK versions. Test on iOS/Android simulators via CI/CD. Implement smoke tests for critical paths. Regular regression testing for each release.",
+        "priority": "high",
+        "dependencies": [
+          11,
+          12
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 15,
+        "title": "Polish UI/UX and Prepare for Beta Release",
+        "description": "Finalize design, fix bugs, optimize user experience, and prepare deployment",
+        "details": "Conduct UX audit using Material Design guidelines. Implement micro-interactions and animations using rive: ^0.12.3. Add loading skeletons for better perceived performance. Create onboarding flow with interactive tutorial. Optimize app size by removing unused assets and dependencies. Set up app store assets: screenshots, descriptions (Korean/English), privacy policy. Configure ProGuard rules for Android release build. Implement app rating prompt using in_app_review: ^2.0.8. Add analytics using Firebase Analytics.",
+        "testStrategy": "Conduct user testing sessions with 10+ beta testers. A/B test onboarding completion rates. Test app store submission process in TestFlight/Play Console. Verify app size is under 50MB. Test deep links and app shortcuts.",
+        "priority": "medium",
+        "dependencies": [
+          13,
+          14
+        ],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-07-30T12:19:42.579Z",
+      "updated": "2025-07-31T11:06:00.820Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
